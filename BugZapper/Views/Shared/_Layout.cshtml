@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BugZapper</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<!--For tommorow or if I get bored. Need to make the side bar fill the bottom part of the screen.
+
+    Also need to make the main screen fill but Im not sure if it does or doesn't do that already. 
+
+    Once The main look of the website looks good to me start making a Log in screen and make that look good next.
+
+    Good Job me :)
+
+    12/16/2019
+    Default layout looks good now. Next focus on making a log in page screen. :)
+    Need to clean up the navbar later and add the buttons I actually want.
+    -->
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">BugZapper</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light border-left" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard <span class="badge badge-primary">0</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Dashboard">Tickets <span class="badge badge-primary">0</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-0">
+                        <li class="nav-item float-right">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Notifications <span class="badge badge-primary">0</span></a>
+                        </li>
+                        <li class="nav-item float-right">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Account</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+            <!-- Sidebar -->
+            <div class="col-12 col-md-2 col-sm-3 d-none d-md-block p-0 pr-3 bd-sidebar">
+                <div class="sidebar-heading p-3">Start Bootstrap </div>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
+                    <a href="#" class="list-group-item list-group-item-action">Shortcuts</a>
+                    <a href="#" class="list-group-item list-group-item-action">Overview</a>
+                    <a href="#" class="list-group-item list-group-item-action">Events</a>
+                    <a href="#" class="list-group-item list-group-item-action">Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action">Status</a>
+                </div>
+            </div>
+            <!-- /#sidebar -->
+            <main role="main" class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container-fluid">
+            &copy; 2019 - BugZapper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
