@@ -28,6 +28,21 @@ namespace BugZapper.Controllers
             return View();
         }
 
+        public IActionResult Bugs()
+        {
+            return View();
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

@@ -13,11 +13,13 @@
 
     Once The main look of the website looks good to me start making a Log in screen and make that look good next.
 
-    Good Job me :)
 
     12/16/2019
     Default layout looks good now. Next focus on making a log in page screen. :)
     Need to clean up the navbar later and add the buttons I actually want.
+
+    12/23/2019
+    Learned how to push code onto github very cool :)
     -->
 <body>
     <header>
@@ -30,27 +32,29 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!--Top Navbar Right pushed buttons-->
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light border-left" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light border-left" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard <span class="badge badge-primary">0</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Dashboard">Tickets <span class="badge badge-primary">0</span></a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Bugs">Bugs <span class="badge badge-primary">0</span></a>
                         </li>
                     </ul>
                 </div>
 
+                <!--Top Navbar Left pushed buttons-->
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-0">
                         <li class="nav-item float-right">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Notifications <span class="badge badge-primary">0</span></a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Login" asp-action="LoginPage">Login</a>
                         </li>
                         <li class="nav-item float-right">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Account</a>
+                            <a class="nav-link text-light btn btn-primary" asp-area="" asp-controller="Home" asp-action="SignUp">Sign up </a>
+                        </li>
+                        <li class="nav-item float-right">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -63,7 +67,7 @@
         <div class="row flex-xl-nowrap">
             <!-- Sidebar -->
             <div class="col-12 col-md-2 col-sm-3 d-none d-md-block p-0 pr-3 bd-sidebar">
-                <div class="sidebar-heading p-3">Start Bootstrap </div>
+                <!--<div class="sidebar-heading p-3">Start Bootstrap </div>-->
                 <div class="list-group list-group-flush">
                     <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
                     <a href="#" class="list-group-item list-group-item-action">Shortcuts</a>
@@ -73,8 +77,8 @@
                     <a href="#" class="list-group-item list-group-item-action">Status</a>
                 </div>
             </div>
-            <!-- /#sidebar -->
-            <main role="main" class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+            <!-- End of sidebar -->
+            <main role="main" class="col-12 col-md-9 py-md-3 pl-md-5 bd-content">
                 @RenderBody()
             </main>
         </div>

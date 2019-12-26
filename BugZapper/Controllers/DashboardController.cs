@@ -12,11 +12,14 @@ namespace BugZapper.Controllers
         // 
         // GET: /Dashboard/
 
-       // public IActionResult Index()
-       // {
-       //     return View();
-       // }
-
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
+        public IActionResult Dash()
+        {
+            return View();
+        }
         // 
         // GET: /Dashboard/Welcome/ 
 

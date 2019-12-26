@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+<!--
+    12/24/2019
+ Basing this login page after this but I'm not doing something right.
+    https://colorlib.com/etc/lf/Login_v14/index.html 
+
+    12/25/2019
+    Login page looks acceptable now
+    -->
+
+<body>
+
+    <div class="wrap-login100 p-l-85 p-r-85 p-t-85 p-b-55 bg-light">
+        <div class="container-login100 align-middle ">
+            <h1 class="display-4 text-center">Account Login</h1>
+            <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55 text-center">
+                <form class="login100-form validate-form flex-sb flex-w pb-2">
+                    <div class="wrap-input100 validate-input m-b-36 align-middle pb-3" data-validate="Username is required">
+                        <input class="input100" placeholder="Username" type="text" name="username">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-12 pb-2" data-validate="Password is required">
+                        <span class="btn-show-pass">
+                            <i class="fa fa-eye"></i>
+                        </span>
+                        <input class="input100" placeholder="Password" type="password" name="pass">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="flex-sb-m w-full p-b-48">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Remember me
+                            </label>
+                        </div>
+                        <div>
+                            <a href="#" class="txt3">
+                                Forgot Password?
+                            </a>
+                            <a class="txt3" asp-area="" asp-controller="Home" asp-action="SignUp">
+                                New User
+                            </a>
+                        </div>
+                    </div>
+                    <div class="container-login100-form-btn pt-2">
+                        <button class="login100-form-btn btn btn-primary">
+                            Login
+                        </button>
+                        <button class="login100-form-btn btn btn-outline-primary">
+                            Login as Guest
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+
+
+
+
+</body>
