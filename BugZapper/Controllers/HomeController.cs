@@ -28,7 +28,7 @@ namespace BugZapper.Controllers
             return View();
         }
 
-        public IActionResult Bugs()
+        public IActionResult BugsPage()
         {
             return View();
         }

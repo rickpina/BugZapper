@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+
 <!--For tommorow or if I get bored. Need to make the side bar fill the bottom part of the screen.
 
     Also need to make the main screen fill but Im not sure if it does or doesn't do that already. 
@@ -20,8 +21,13 @@
 
     12/23/2019
     Learned how to push code onto github very cool :)
+
+   12/29/2019
+    Added a new Bugs model page that holds data for the Bugs controller to display locally for testing purposes. 
     -->
+
 <body>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -39,7 +45,7 @@
                             <a class="nav-link text-light border-left" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Bugs">Bugs <span class="badge badge-primary">0</span></a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Bugs" asp-action="ListBugs">Bugs <span class="badge badge-primary">0</span></a>
                         </li>
                     </ul>
                 </div>
@@ -89,6 +95,7 @@
             &copy; 2019 - BugZapper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
