@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
+using static BugZapper.Database;
 
 namespace BugZapper
 {
@@ -13,6 +15,7 @@ namespace BugZapper
     {
         public static void Main(string[] args)
         {
+            MongoCRUD db = new MongoCRUD("BZBugs");
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -22,5 +25,7 @@ namespace BugZapper
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+
     }
 }

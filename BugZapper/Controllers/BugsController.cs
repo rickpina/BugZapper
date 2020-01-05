@@ -17,6 +17,11 @@ namespace BugZapper.Controllers
             return View();
         }
 
+        public ActionResult CreateBug()
+        {
+            return View();
+        }
+
         // GET: Bugs/Details/5
         public ActionResult Details(int id)
         {
@@ -94,11 +99,12 @@ namespace BugZapper.Controllers
 
         public ActionResult ListBugs()
         {
-            List<BugsModel> bugs = new List<BugsModel>();
-
-            bugs.Add(new BugsModel { BugID = 101, Status = "Unfixed", Info = "Network Bug", Date = "Today" });
-            bugs.Add(new BugsModel { BugID = 102, Status = "Fixed", Info = "Server Bug", Date = "Yesturday" });
-            bugs.Add(new BugsModel { BugID = 103, Status = "Pending", Info = "Logic Bug", Date = "Week Ago" });
+            List<BugsModel> bugs = new List<BugsModel>
+            {
+                new BugsModel { BugID = 101, Status = "Unfixed", Info = "Network Bug", Date = "Today" },
+                new BugsModel { BugID = 102, Status = "Fixed", Info = "Server Bug", Date = "Yesturday" },
+                new BugsModel { BugID = 103, Status = "Pending", Info = "Logic Bug", Date = "Week Ago" }
+            };
 
             return View(bugs); 
         }
