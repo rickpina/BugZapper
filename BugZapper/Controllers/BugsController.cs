@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BugZapper.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static BugZapper.Database;
 
 namespace BugZapper.Controllers
 {
@@ -22,6 +23,18 @@ namespace BugZapper.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        public ActionResult ListBugs()
+        {
+            MongoCRUD db = new MongoCRUD("BZBugs");
+            List<BugsModel> bugs = db.ReadRecords<BugsModel>("Bugs");
+            return View(bugs);
+        }
+
         // GET: Bugs/Details/5
         public ActionResult Details(int id)
         {
@@ -37,13 +50,13 @@ namespace BugZapper.Controllers
         // POST: Bugs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(BugsModel model)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                 MongoCRUD db = new MongoCRUD("BZBugs");
+                 db.InsertRecord("Bugs", model);
+                return RedirectToAction(nameof(ListBugs));                             
             }
             catch
             {
@@ -97,17 +110,7 @@ namespace BugZapper.Controllers
             }
         }
 
-        public ActionResult ListBugs()
-        {
-            List<BugsModel> bugs = new List<BugsModel>
-            {
-                new BugsModel { BugID = 101, Status = "Unfixed", Info = "Network Bug", Date = "Today" },
-                new BugsModel { BugID = 102, Status = "Fixed", Info = "Server Bug", Date = "Yesturday" },
-                new BugsModel { BugID = 103, Status = "Pending", Info = "Logic Bug", Date = "Week Ago" }
-            };
 
-            return View(bugs); 
-        }
 
     } //end of Controller class
 }
