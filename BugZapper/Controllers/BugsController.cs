@@ -23,16 +23,66 @@ namespace BugZapper.Controllers
             return View();
         }
 
-        public ActionResult Test()
+        public ActionResult EditBug()
         {
             return View();
         }
 
+        // This method inserts data into the databsse after the Action is triggered. POST: Bugs/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(BugsModel model)
+        {
+            try
+            {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+                db.InsertRecord("Bugs", model);
+                return RedirectToAction(nameof(ListBugs));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //This method reads the records from the database and returns the data to a view. 
         public ActionResult ListBugs()
         {
             MongoCRUD db = new MongoCRUD("BZBugs");
             List<BugsModel> bugs = db.ReadRecords<BugsModel>("Bugs");
             return View(bugs);
+        }
+
+        // POST: Bugs/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Guid id, BugsModel model)
+        {
+            try
+            {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+                db.UpsertRecord("Bugs", id, model);
+                return RedirectToAction(nameof(ListBugs));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // This method deletes data from the database and then redisplays the data. GET: Bugs/Delete/5
+        public ActionResult DeleteBug(Guid id)
+        {
+            try
+            {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+                db.DeleteRecord<BugsModel>("Bugs", id);
+                return RedirectToAction(nameof(ListBugs));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Bugs/Details/5
@@ -41,54 +91,10 @@ namespace BugZapper.Controllers
             return View();
         }
 
-        // GET: Bugs/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Bugs/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(BugsModel model)
-        {
-            try
-            {
-                 MongoCRUD db = new MongoCRUD("BZBugs");
-                 db.InsertRecord("Bugs", model);
-                return RedirectToAction(nameof(ListBugs));                             
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Bugs/Edit/5
         public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Bugs/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Bugs/Delete/5
-        public ActionResult Delete(int id)
         {
             return View();
         }
