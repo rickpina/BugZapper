@@ -10,10 +10,10 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" asp-action="">
+        <form  method="post" asp-action="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
+                <label asp-for="Id" id="guid" class="control-label"></label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
@@ -40,6 +40,7 @@
             <div class="form-group">
                 <input type="submit" value="Update" class="btn btn-primary" asp-controller="Bugs" asp-action="Edit" />
             </div>
+
         </form>
     </div>
 </div>
@@ -47,4 +48,28 @@
 <div>
     <a asp-action="ListBugs" class="btn btn-outline-info">Back to List</a>
 </div>
+
+<script>
+
+    var gid = getUrlVars()["GID"];
+    document.getElementById("guid").innerHTML = gid;
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+</script>
+
+@*<script>
+
+    function initInput() {
+        var variable = gid;
+        document.forms[0].IDBox.value = variable;
+    }
+
+</script>*@
 
