@@ -12,9 +12,10 @@ namespace BugZapper.Models
     {
         [BsonId]
         public Guid Id { get; set; }
+
         [Display(Name = "Bug ID")]
-        [Range(100000, 999999, ErrorMessage ="Over six caracters used or inputing number.")]
-        [Required(ErrorMessage ="You must add a Bug ID.")]
+        [Range(100000, 999999, ErrorMessage = "Over six caracters used or inputing number.")]
+        [Required(ErrorMessage = "You must add a Bug ID.")]
         public int BugID { get; set; }
 
         [Required(ErrorMessage = "You must add a Status.")]
