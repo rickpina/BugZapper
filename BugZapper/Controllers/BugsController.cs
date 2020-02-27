@@ -71,6 +71,8 @@ namespace BugZapper.Controllers
         }
 
         // This method deletes data from the database and then redisplays the data. GET: Bugs/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteBug(Guid id)
         {
             try
@@ -85,38 +87,11 @@ namespace BugZapper.Controllers
             }
         }
 
-        // GET: Bugs/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-
-
-        // GET: Bugs/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Bugs/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
+        //// GET: Bugs/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
     } //end of Controller class
-}
+} //end of namespace

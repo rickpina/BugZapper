@@ -63,7 +63,7 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Login" asp-action="LoginPage">Login</a>
                         </li>
                         <li class="nav-item float-right">
-                            <a class="nav-link text-light btn btn-primary" asp-area="" asp-controller="Home" asp-action="SignUp">Sign up </a>
+                            <a class="nav-link text-light btn btn-primary" asp-area="" asp-controller="Login" asp-action="SignUp">Sign up </a>
                         </li>
                         <li class="nav-item float-right">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
@@ -81,7 +81,7 @@
             <div class="col-12 col-md-2 col-sm-3 d-none d-md-block p-0 pr-3 bd-sidebar">
                 <!--<div class="sidebar-heading p-3">Start Bootstrap </div>-->
                 <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Dashboard" class="list-group-item list-group-item-action">Dashboard</a>
                     <a href="#" class="list-group-item list-group-item-action">Shortcuts</a>
                     <a href="#" class="list-group-item list-group-item-action">Overview</a>
                     <a href="#" class="list-group-item list-group-item-action">Events</a>
@@ -98,7 +98,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid">
-            &copy; 2019 - BugZapper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - BugZapper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
