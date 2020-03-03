@@ -23,6 +23,21 @@ namespace BugZapper.Controllers
             return View();
         }
 
+        //Work In progress This will eventually login the user
+        public ActionResult LoginUser(string username, string pass)
+        {
+            try
+            {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+
+                return View();
+            }
+            catch
+            {
+                return View();
+            }   
+        }
+
         // This method inserts data into the databsse after the Action is triggered. 
         [HttpPost]
         [ValidateAntiForgeryToken]
