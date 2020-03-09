@@ -23,25 +23,26 @@ namespace BugZapper.Controllers
             return View();
         }
 
-        //Work In progress This will eventually login the user
+        //Logs in user based on Username and Password and then redirects them to their Profile Page. If they enter incorrectly it will keep them at the loginpage.
         public ActionResult LoginUser(string username, string pass)
         {
             try
             {
                 MongoCRUD db = new MongoCRUD("BZBugs");
+                db.FindLoginRecord<LoginModel>(username, pass);
 
-                return View();
+                return RedirectToAction("Profile", "Home");
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(LoginPage));
             }   
         }
 
         // This method inserts data into the databsse after the Action is triggered. 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(LoginModel model)
+        public ActionResult CreateUser(LoginModel model)
         {
             try
             {

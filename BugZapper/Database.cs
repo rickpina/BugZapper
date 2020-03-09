@@ -39,11 +39,24 @@ namespace BugZapper
 
             //This method will select a record from the databse based off the users input on the webpage.
 
-            //public List<T> FindLoginRecord<T>(string username, string password)
-            //{
-            //    var collection = db.GetCollection<T>("Users"); 
-            //    return collection.Find(new BsonDocument(), ).ToList();
-            //} 
+            public T FindLoginRecord<T>(string username, string password)
+            {
+                var collection = db.GetCollection<T>("Users");
+
+                var builder = Builders<T>.Filter;
+                var filter = builder.And(builder.Eq("Username", username), builder.Eq("Password", password));
+
+
+                return collection.Find(filter).First();
+            }
+
+            public T LoadRecordById<T>(string table, Guid id)
+            {
+                var collection = db.GetCollection<T>(table);
+                var filter = Builders<T>.Filter.Eq("Id", id);
+
+                return collection.Find(filter).First();
+            }
 
             //This can replace a record with a new updated version or create a new one if one cannot be found.
             public void UpsertRecord<T>(string table, Guid id, T record)
