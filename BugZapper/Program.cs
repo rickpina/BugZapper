@@ -16,16 +16,7 @@ namespace BugZapper
     {
         public static void Main(string[] args)
         {
-            //MongoCRUD db = new MongoCRUD("BZBugs");
-            //var recs = db.ReadRecords<BugsModel>("Bugs");
-
-            //foreach(var rec in recs)
-            //{
-            //    Console.WriteLine($" { rec.Id }: { rec.BugID } { rec.Status } { rec.Info } { rec.Date } ");
-            //}
-            //Console.ReadLine();
-            CreateHostBuilder(args).Build().Run();
-         
+            CreateHostBuilder(args).Build().Run();        
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

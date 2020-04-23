@@ -30,7 +30,7 @@ namespace BugZapper
                 collection.InsertOne(record);
             }
 
-            //This can read data from the database. 
+            //This reads all data from a table in the database. 
             public List<T> ReadRecords<T>(string table)
             {
                 var collection = db.GetCollection<T>(table);
@@ -38,13 +38,24 @@ namespace BugZapper
             }
 
             //This method will select a record from the databse based off the users input on the webpage.
-
-            public T FindLoginRecord<T>(string username, string password)
+            public List<T> FindLoginRecordByUsername<T>(string username)
             {
                 var collection = db.GetCollection<T>("Users");
 
                 var builder = Builders<T>.Filter;
-                var filter = builder.And(builder.Eq("Username", username), builder.Eq("Password", password));
+                var filter = builder.And(builder.Eq("Username", username));
+
+                return collection.Find(filter).ToList();
+                // return collection.Find(filter).First();
+            }
+
+            //This method will select a record from the databse based off the users input on the webpage.
+            public T FindLoginRecord<T>(string username, string Salt, string Hash)
+            {
+                var collection = db.GetCollection<T>("Users");
+
+                var builder = Builders<T>.Filter;
+                var filter = builder.And(builder.Eq("Username", username), builder.Eq("Salt", Salt), builder.Eq("Hash", Hash));
 
 
                 return collection.Find(filter).First();

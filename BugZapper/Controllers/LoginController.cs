@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using BugZapper.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using static BugZapper.Database;
 
 //Sign In is under the Home folder but the Controller it will be using is in Login. This will probably confuse me in the future so change that if its an issue.
@@ -27,16 +29,48 @@ namespace BugZapper.Controllers
         public ActionResult LoginUser(string username, string pass)
         {
             try
-            {
+            {              
                 MongoCRUD db = new MongoCRUD("BZBugs");
-                db.FindLoginRecord<LoginModel>(username, pass);
+                List<LoginModel> user = db.FindLoginRecordByUsername<LoginModel>(username);
 
-                return RedirectToAction("Profile", "Home");
+                bool isPasswordMatched = VerifyPassword(pass, user.First().Salt, user.First().Hash);
+                if (isPasswordMatched)
+                {
+                    //Login Successfull           
+                    db.FindLoginRecord<LoginModel>(username, user.First().Salt, user.First().Hash);
+                    return RedirectToAction("Profile", "Home");
+                }
+                else
+                {
+                    //Login Failed
+                    return RedirectToAction(nameof(LoginPage));
+                }
             }
             catch
             {
                 return RedirectToAction(nameof(LoginPage));
             }   
+        }
+
+        public static bool VerifyPassword(string enteredPassword, string storedSalt, string storedHash)
+        {
+            var saltBytes = Convert.FromBase64String(storedSalt);
+            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(enteredPassword, saltBytes, 10000);
+            return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == storedHash;
+        }
+
+        public static LoginModel GenerateSaltedHash(int size, string password)
+        {
+            var saltBytes = new byte[size];
+            var provider = new RNGCryptoServiceProvider();
+            provider.GetNonZeroBytes(saltBytes);
+            var salt = Convert.ToBase64String(saltBytes);
+
+            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, 10000);
+            var hashPassword = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+
+            LoginModel hashSalt = new LoginModel { Hash = hashPassword, Salt = salt };
+            return hashSalt;
         }
 
         // This method inserts data into the databsse after the Action is triggered. 
@@ -46,9 +80,22 @@ namespace BugZapper.Controllers
         {
             try
             {
+
+                var saltBytes = new byte[64];
+                var provider = new RNGCryptoServiceProvider();
+                provider.GetNonZeroBytes(saltBytes);
+                var salt = Convert.ToBase64String(saltBytes);
+
+                var rfc2898DeriveBytes = new Rfc2898DeriveBytes(model.Password, saltBytes, 10000);
+                var hashPassword = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+
+                model.Hash = hashPassword;
+                model.Salt = salt;
+                model.Password = null;
+
                 MongoCRUD db = new MongoCRUD("BZBugs");
                 db.InsertRecord("Users", model);
-                return RedirectToAction(nameof(LoginPage));
+                return RedirectToAction("Profile", "Home");
                 //I want to Redirect this action to something more relevant like a Profile page or something.
             }
             catch
