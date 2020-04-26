@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using BugZapper.Models;
 
 namespace BugZapper
 {
@@ -14,7 +15,7 @@ namespace BugZapper
 
         public class MongoCRUD
         {
-            private IMongoDatabase db;
+            private readonly IMongoDatabase db;
 
             //This connects to the database
             public MongoCRUD(string database)
@@ -46,7 +47,6 @@ namespace BugZapper
                 var filter = builder.And(builder.Eq("Username", username));
 
                 return collection.Find(filter).ToList();
-                // return collection.Find(filter).First();
             }
 
             //This method will select a record from the databse based off the users input on the webpage.
@@ -86,6 +86,7 @@ namespace BugZapper
                 var filter = Builders<T>.Filter.Eq("Id",id);
                 collection.DeleteOne(filter);
             }
+
         }// end of MongoCRUD Class
     }// end of Database Class
 }

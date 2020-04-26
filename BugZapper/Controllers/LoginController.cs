@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using static BugZapper.Database;
+using static BugZapper.PasswordSecurity;
 
 //Sign In is under the Home folder but the Controller it will be using is in Login. This will probably confuse me in the future so change that if its an issue.
 
@@ -52,27 +53,6 @@ namespace BugZapper.Controllers
             }   
         }
 
-        public static bool VerifyPassword(string enteredPassword, string storedSalt, string storedHash)
-        {
-            var saltBytes = Convert.FromBase64String(storedSalt);
-            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(enteredPassword, saltBytes, 10000);
-            return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == storedHash;
-        }
-
-        public static LoginModel GenerateSaltedHash(int size, string password)
-        {
-            var saltBytes = new byte[size];
-            var provider = new RNGCryptoServiceProvider();
-            provider.GetNonZeroBytes(saltBytes);
-            var salt = Convert.ToBase64String(saltBytes);
-
-            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltBytes, 10000);
-            var hashPassword = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
-
-            LoginModel hashSalt = new LoginModel { Hash = hashPassword, Salt = salt };
-            return hashSalt;
-        }
-
         // This method inserts data into the databsse after the Action is triggered. 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,19 +60,11 @@ namespace BugZapper.Controllers
         {
             try
             {
-
-                var saltBytes = new byte[64];
-                var provider = new RNGCryptoServiceProvider();
-                provider.GetNonZeroBytes(saltBytes);
-                var salt = Convert.ToBase64String(saltBytes);
-
-                var rfc2898DeriveBytes = new Rfc2898DeriveBytes(model.Password, saltBytes, 10000);
-                var hashPassword = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
-
-                model.Hash = hashPassword;
-                model.Salt = salt;
-                model.Password = null;
-
+                if(ModelState.IsValid == false)
+                {
+                    return RedirectToAction("Signup", "Login");
+                }
+                GenerateSaltedHash(model, 64, model.Password);
                 MongoCRUD db = new MongoCRUD("BZBugs");
                 db.InsertRecord("Users", model);
                 return RedirectToAction("Profile", "Home");
@@ -100,7 +72,7 @@ namespace BugZapper.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Signup", "Login");
             }
         }
     }
