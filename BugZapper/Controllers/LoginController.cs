@@ -60,12 +60,19 @@ namespace BugZapper.Controllers
         {
             try
             {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+
+                //This checks if the username is unique or not.
+                if (db.CheckIfUsernameIsUnique<LoginModel>(model.Username) == true){
+                    return RedirectToAction("Signup", "Login");
+                }
+                //this checks if there is valid data in the required fields (Username, Password)
                 if(ModelState.IsValid == false)
                 {
                     return RedirectToAction("Signup", "Login");
                 }
-                GenerateSaltedHash(model, 64, model.Password);
-                MongoCRUD db = new MongoCRUD("BZBugs");
+
+                GenerateSaltedHash(model, 64, model.Password);               
                 db.InsertRecord("Users", model);
                 return RedirectToAction("Profile", "Home");
                 //I want to Redirect this action to something more relevant like a Profile page or something.

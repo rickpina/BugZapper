@@ -49,6 +49,34 @@ namespace BugZapper
                 return collection.Find(filter).ToList();
             }
 
+            //This checks if a username is unique by finding it first in the database.
+            public bool CheckIfUsernameIsUnique<T>(string username)
+            {
+                try
+                {
+                    var collection = db.GetCollection<T>("Users");
+
+                    var builder = Builders<T>.Filter;
+                    var filter = builder.And(builder.Eq("Username", username));
+
+                    List<LoginModel> model = FindLoginRecordByUsername<LoginModel>(username);
+
+                    if( model.First().Username == username )
+                    { 
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                                          
+                }
+                catch
+                {
+                    return false;
+                }               
+            }
+
             //This method will select a record from the databse based off the users input on the webpage.
             public T FindLoginRecord<T>(string username, string Salt, string Hash)
             {

@@ -15,9 +15,10 @@
                 <label asp-for="Username" class="control-label"></label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
-                <span class="field-validation-error text-danger"
-                      data-valmsg-for="Username"
-                      data-valmsg-replace="true">The Username field is required.</span>
+                @Html.ValidationMessage("Username", "", new { @class = "text-danger" })
+            <span class="field-validation-error text-danger"
+                  data-valmsg-for="Username"
+                  data-valmsg-replace="true">The Username field is required.</span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
