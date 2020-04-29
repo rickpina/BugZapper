@@ -63,10 +63,12 @@ namespace BugZapper
 
                     if( model.First().Username == username )
                     { 
+                        //Returns true if they do match
                         return true;
                     }
                     else
                     {
+                        //Returns False if they do not match
                         return false;
                     }
                                           
@@ -111,7 +113,7 @@ namespace BugZapper
             public void DeleteRecord<T>(string table, Guid id)
             {
                 var collection = db.GetCollection<T>(table);
-                var filter = Builders<T>.Filter.Eq("Id",id);
+                var filter = Builders<T>.Filter.Eq("_id",id);
                 collection.DeleteOne(filter);
             }
 

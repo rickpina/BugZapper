@@ -70,9 +70,7 @@ namespace BugZapper.Controllers
             }
         }
 
-        // This method deletes data from the database and then redisplays the data. GET: Bugs/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // This method deletes data from the database and then redisplays the data.
         public ActionResult DeleteBug(Guid id)
         {
             try

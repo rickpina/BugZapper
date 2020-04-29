@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using static BugZapper.Database;
 using static BugZapper.PasswordSecurity;
+using Microsoft.AspNetCore.Authorization;
 
 //Sign In is under the Home folder but the Controller it will be using is in Login. This will probably confuse me in the future so change that if its an issue.
 
@@ -59,28 +60,33 @@ namespace BugZapper.Controllers
         public ActionResult CreateUser(LoginModel model)
         {
             try
-            {
-                MongoCRUD db = new MongoCRUD("BZBugs");
-
-                //This checks if the username is unique or not.
-                if (db.CheckIfUsernameIsUnique<LoginModel>(model.Username) == true){
-                    return RedirectToAction("Signup", "Login");
-                }
+            {               
                 //this checks if there is valid data in the required fields (Username, Password)
-                if(ModelState.IsValid == false)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Signup", "Login");
-                }
+                    MongoCRUD db = new MongoCRUD("BZBugs");
 
-                GenerateSaltedHash(model, 64, model.Password);               
-                db.InsertRecord("Users", model);
-                return RedirectToAction("Profile", "Home");
-                //I want to Redirect this action to something more relevant like a Profile page or something.
+                    //This checks if the username is unique or not.
+                    if (db.CheckIfUsernameIsUnique<LoginModel>(model.Username) == true)
+                    {
+                        //Failure State    
+                        ModelState.AddModelError("Username", "This Username already exists.");
+                        return View("SignUp", model);
+                    }                 
+                    GenerateSaltedHash(model, 64, model.Password);
+                    db.InsertRecord("Users", model);
+                    //I want to Redirect this action to something more relevant like a Profile page or something.
+                    //Success
+                    return RedirectToAction("Profile", "Home");                    
+                }
+                //Failure State
+                return View("SignUp", model);               
             }
             catch
             {
-                return RedirectToAction("Signup", "Login");
+                //Failure State
+                return View("SignUp", model);
             }
         }
-    }
-}
+    }//end of class
+}//end of namespace
