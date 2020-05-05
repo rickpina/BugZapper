@@ -1,15 +1,19 @@
-﻿@{
+﻿@model BugZapper.Models.LoginModel
+
+@{
     ViewData["Title"] = "Login Page";
 }
 
 <!--
     12/24/2019
  Basing this login page after this but I'm not doing something right.
-    https://colorlib.com/etc/lf/Login_v14/index.html 
+    https://colorlib.com/etc/lf/Login_v14/index.html
 
     12/25/2019
     Login page looks acceptable now
     -->
+
+@Html.ValidationSummary()
 
 <body>
 
@@ -19,10 +23,12 @@
 
             <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55 text-center">
 
+
+
                 <form class="login100-form validate-form flex-sb flex-w pb-2">
 
                     <div class="wrap-input100 validate-input m-b-36 align-middle pb-3" data-validate="Username is required">
-                        <input class="input100" placeholder="Username" type="text" name="username">
+                        <input class="input100" placeholder="Username" type="text" name="username" required>
                         <span class="focus-input100"></span>
                     </div>
 
@@ -30,7 +36,7 @@
                         <span class="btn-show-pass">
                             <i class="fa fa-eye"></i>
                         </span>
-                        <input class="input100" placeholder="Password" type="password" name="pass">
+                        <input class="input100" placeholder="Password" type="password" name="pass" required>
                         <span class="focus-input100"></span>
                     </div>
 

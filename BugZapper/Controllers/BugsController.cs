@@ -35,9 +35,17 @@ namespace BugZapper.Controllers
         {
             try
             {
-                MongoCRUD db = new MongoCRUD("BZBugs");
-                db.InsertRecord("Bugs", model);
-                return RedirectToAction(nameof(ListBugs));
+                if (ModelState.IsValid)
+                {
+                    MongoCRUD db = new MongoCRUD("BZBugs");
+                    db.InsertRecord("Bugs", model);
+                    return RedirectToAction(nameof(ListBugs));
+                }
+                else
+                {
+                    return View("CreateBug", model);
+                }
+                
             }
             catch
             {

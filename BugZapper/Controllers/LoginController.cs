@@ -31,26 +31,38 @@ namespace BugZapper.Controllers
         public ActionResult LoginUser(string username, string pass)
         {
             try
-            {              
-                MongoCRUD db = new MongoCRUD("BZBugs");
-                List<LoginModel> user = db.FindLoginRecordByUsername<LoginModel>(username);
-
-                bool isPasswordMatched = VerifyPassword(pass, user.First().Salt, user.First().Hash);
-                if (isPasswordMatched)
+            {
+                if (ModelState.IsValid)
                 {
-                    //Login Successfull           
-                    db.FindLoginRecord<LoginModel>(username, user.First().Salt, user.First().Hash);
-                    return RedirectToAction("Profile", "Home");
+                    MongoCRUD db = new MongoCRUD("BZBugs");
+                    List<LoginModel> user = db.FindLoginRecordByUsername<LoginModel>(username);
+
+                    bool isPasswordMatched = VerifyPassword(pass, user.First().Salt, user.First().Hash);
+                    if (isPasswordMatched)
+                    {
+                        //Login Successfull           
+                        db.FindLoginRecord<LoginModel>(username, user.First().Salt, user.First().Hash);
+                        return RedirectToAction("Profile", "Home");
+                    }
+                    else
+                    {
+                        //Login Failed
+                        ModelState.AddModelError("", "The Username or Password does not match or is incorrect.");
+                        return View("LoginPage");
+                    }
                 }
                 else
                 {
                     //Login Failed
-                    return RedirectToAction(nameof(LoginPage));
+                    ModelState.AddModelError("", "The Username or Password does not match or is incorrect.");
+                    return View("LoginPage");
                 }
             }
             catch
             {
-                return RedirectToAction(nameof(LoginPage));
+                //Login Failed
+                ModelState.AddModelError("", "The Username or Password does not match or is incorrect.");
+                return View("LoginPage");
             }   
         }
 
@@ -61,7 +73,7 @@ namespace BugZapper.Controllers
         {
             try
             {               
-                //this checks if there is valid data in the required fields (Username, Password)
+                //this checks if there is valid data in the required fields On the SignUp page
                 if (ModelState.IsValid)
                 {
                     MongoCRUD db = new MongoCRUD("BZBugs");
