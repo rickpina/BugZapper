@@ -47,21 +47,21 @@ namespace BugZapper.Controllers
                     else
                     {
                         //Login Failed
-                        ModelState.AddModelError("", "The Username or Password does not match or is incorrect.");
+                        ModelState.AddModelError("", "The password is incorrect.");
                         return View("LoginPage");
                     }
                 }
                 else
                 {
                     //Login Failed
-                    ModelState.AddModelError("", "The Username or Password does not match or is incorrect.");
+                    ModelState.AddModelError("", "The Username or Password is incorrect.");
                     return View("LoginPage");
                 }
             }
             catch
             {
                 //Login Failed
-                ModelState.AddModelError("", "The Username or Password does not match or is incorrect.");
+                ModelState.AddModelError("", "The Username or Password is incorrect.");
                 return View("LoginPage");
             }   
         }

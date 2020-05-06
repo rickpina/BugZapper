@@ -96,7 +96,7 @@ namespace BugZapper
                 var collection = db.GetCollection<T>(table);
                 var filter = Builders<T>.Filter.Eq("Id", id);
 
-                return collection.Find(filter).First();
+                return collection.Find(filter).First();               
             }
 
             //This can replace a record with a new updated version or create a new one if one cannot be found.

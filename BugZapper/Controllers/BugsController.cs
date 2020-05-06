@@ -28,6 +28,20 @@ namespace BugZapper.Controllers
             return View();
         }
 
+        public ActionResult BugDetails(Guid id)
+        {
+            try
+            {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+                BugsModel details = db.LoadRecordById<BugsModel>("Bugs", id);
+                return View(details);             
+            }
+            catch
+            {
+                return RedirectToAction(nameof(ListBugs));
+            }         
+        }
+
         // This method inserts data into the databsse after the Action is triggered. POST: Bugs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -61,20 +75,26 @@ namespace BugZapper.Controllers
             return View(bugs);
         }
 
-        // POST: Bugs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, BugsModel model)
         {
             try
             {
-                MongoCRUD db = new MongoCRUD("BZBugs");
-                db.UpsertRecord("Bugs", id, model);
-                return RedirectToAction(nameof(ListBugs));
+                if (ModelState.IsValid)
+                {
+                    MongoCRUD db = new MongoCRUD("BZBugs");
+                    db.UpsertRecord("Bugs", id, model);
+                    return RedirectToAction(nameof(ListBugs));
+                }
+                else
+                {
+                    return View("EditBug", model);
+                }
             }
             catch
             {
-                return View();
+                return View("EditBug");
             }
         }
 
@@ -92,12 +112,6 @@ namespace BugZapper.Controllers
                 return View();
             }
         }
-
-        //// GET: Bugs/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
 
     } //end of Controller class
 } //end of namespace

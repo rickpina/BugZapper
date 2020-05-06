@@ -44,7 +44,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditBug", new {  GID = item.Id, BugId = item.BugID }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "BugDetails", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "DeleteBug", new {  id = item.Id })
             </td>
         </tr>
