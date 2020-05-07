@@ -41,8 +41,8 @@ namespace BugZapper.Controllers
                     if (isPasswordMatched)
                     {
                         //Login Successfull           
-                        db.FindLoginRecord<LoginModel>(username, user.First().Salt, user.First().Hash);
-                        return RedirectToAction("Profile", "Home");
+                        LoginModel model = db.FindLoginRecord<LoginModel>(username, user.First().Salt, user.First().Hash);                       
+                        return View("~/Views/Home/Profile.cshtml", model);
                     }
                     else
                     {
@@ -89,7 +89,7 @@ namespace BugZapper.Controllers
                     db.InsertRecord("Users", model);
                     //I want to Redirect this action to something more relevant like a Profile page or something.
                     //Success
-                    return RedirectToAction("Profile", "Home");                    
+                    return View("~/Views/Home/Profile.cshtml", model);
                 }
                 //Failure State
                 return View("SignUp", model);               

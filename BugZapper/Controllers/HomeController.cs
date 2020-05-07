@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BugZapper.Models;
+using static BugZapper.Database;
 
 namespace BugZapper.Controllers
 {
@@ -33,9 +34,18 @@ namespace BugZapper.Controllers
             return View();
         }
 
-        public IActionResult Profile()
+        public ActionResult Profile(LoginModel model)
         {
-            return View();
+            try
+            {
+                MongoCRUD db = new MongoCRUD("BZBugs");
+                LoginModel details = db.LoadRecordById<LoginModel>("Users", model.Id);
+                return View(details);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public IActionResult SignUp()

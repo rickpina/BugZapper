@@ -117,6 +117,12 @@ namespace BugZapper
                 collection.DeleteOne(filter);
             }
 
+            public long GetCount<T>(string table)
+            {
+                var collection = db.GetCollection<T>(table);
+                return collection.EstimatedDocumentCount();
+            }
+
         }// end of MongoCRUD Class
     }// end of Database Class
 }
