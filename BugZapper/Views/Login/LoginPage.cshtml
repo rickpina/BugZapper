@@ -25,7 +25,7 @@
 
 
 
-                <form class="login100-form validate-form flex-sb flex-w pb-2">
+                <form method="post" class="login100-form validate-form flex-sb flex-w pb-2">
 
                     <div class="wrap-input100 validate-input m-b-36 align-middle pb-3" data-validate="Username is required">
                         <input class="input100" placeholder="Username" type="text" name="username" required>
@@ -49,8 +49,9 @@
                         </div>
                         <div>
                             <a href="#" class="txt3">
-                                Forgot Password?
+                                Admin Login
                             </a>
+                            |
                             <a class="txt3" asp-area="" asp-controller="Login" asp-action="SignUp">
                                 New User
                             </a>
@@ -61,7 +62,7 @@
                         <button class="login100-form-btn btn btn-primary" asp-area="" asp-controller="Login" asp-action="LoginUser">
                             Login
                         </button>
-                        <button class="login100-form-btn btn btn-outline-primary" value="ignore" formnovalidate asp-area="" asp-controller="Home" asp-action="Dashboard">
+                        <button class="login100-form-btn btn btn-outline-primary" value="ignore" formnovalidate asp-area="" asp-controller="Home" asp-action="GuestLogin">
                             Login as Guest
                         </button>
                     </div>

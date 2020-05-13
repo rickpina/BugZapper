@@ -39,13 +39,18 @@ namespace BugZapper.Controllers
             try
             {
                 MongoCRUD db = new MongoCRUD("BZBugs");
-                LoginModel details = db.LoadRecordById<LoginModel>("Users", model.Id);
+                LoginModel details = db.LoadRecordById<LoginModel>("Users", model.Id);                
                 return View(details);
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult GuestLogin()
+        {
+            return View("~/Views/Shared/_GuestLayout.cshtml", "Dashboard");
         }
 
         public IActionResult SignUp()

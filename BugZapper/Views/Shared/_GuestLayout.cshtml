@@ -9,30 +9,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/BugzappeFavicon_16x16.ico" />
 </head>
 
-<!--
-    For tommorow or if I get bored. Need to make the side bar fill the bottom part of the screen.
-
-    Also need to make the main screen fill but Im not sure if it does or doesn't do that already.
-
-    Once The main look of the website looks good to me start making a Log in screen and make that look good next.
-
-
-    12/16/2019
-    Default layout looks good now. Next focus on making a log in page screen. :)
-    Need to clean up the navbar later and add the buttons I actually want.
-
-    12/23/2019
-    Learned how to push code onto github very cool :)
-
-   12/29/2019
-    Added a new Bugs model page that holds data for the Bugs controller to display locally for testing purposes.
-
-    1/4/2020
-    Using MongoDB as a database.
-    Need to implement CRUD and then need to create a form for users to input information to the databse through the form.
-    This same form will also be used for the new users page so it can hold accounts as well.
-    -->
-
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
@@ -55,18 +31,18 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!--Top Navbar Right pushed buttons-->
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-0">
+                        <li class="nav-item float-right">
+                            <a class="nav-link text-light"> Login as Guest</a>
+                        </li>
                         <li class="nav-item float-right">
                             <a class="nav-link text-light" asp-area="" asp-controller="Login" asp-action="LoginPage">Login</a>
                         </li>
                         <li class="nav-item float-right">
                             <a class="nav-link text-light btn btn-primary" asp-area="" asp-controller="Login" asp-action="SignUp">Sign up </a>
-                        </li>
-                        <li class="nav-item float-right">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -83,7 +59,6 @@
                 <div class="list-group list-group-flush">
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action">Home</a>
                     <a asp-area="" asp-controller="Home" asp-action="Dashboard" class="list-group-item list-group-item-action">Dashboard</a>
-                    <a asp-area="" asp-controller="Home" asp-action="Profile" class="list-group-item list-group-item-action">Profile</a>
                 </div>
             </div>
             <!-- End of sidebar -->

@@ -117,9 +117,9 @@ namespace BugZapper
                 collection.DeleteOne(filter);
             }
 
-            public long GetCount<T>(string table)
+            public long GetCount(string table)
             {
-                var collection = db.GetCollection<T>(table);
+                var collection = db.GetCollection<BugsModel>(table);
                 return collection.EstimatedDocumentCount();
             }
 

@@ -5,7 +5,6 @@
 }
 
 <h1>Listing all Bugs</h1>
-
 <p>
     <a class="btn btn-outline-info" asp-area="" asp-controller="Bugs" asp-action="CreateBug">Create New</a>
 </p>
@@ -28,26 +27,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BugID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Info)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditBug", new {  GID = item.Id, BugId = item.BugID }) |
-                @Html.ActionLink("Details", "BugDetails", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteBug", new {  id = item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BugID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Info)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditBug", new { GID = item.Id, BugId = item.BugID }) |
+                    @Html.ActionLink("Details", "BugDetails", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteBug", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
