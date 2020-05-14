@@ -47,11 +47,6 @@ namespace BugZapper.Controllers
                 return View();
             }
         }
-        public ActionResult ProfileDemo()
-        { 
-            return View();
-        }
-
 
         public ActionResult GuestLogin()
         {

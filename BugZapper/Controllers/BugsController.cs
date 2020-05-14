@@ -75,22 +75,6 @@ namespace BugZapper.Controllers
             return View(bugs);
         }
 
-        public static Guid ToGuid(int value)
-        {
-            byte[] bytes = new byte[16];
-            BitConverter.GetBytes(value).CopyTo(bytes, 0);
-            return new Guid(bytes);
-        }
-
-        public ActionResult ListBugsDemo()
-        {
-            List<BugsModel> bugs = new List<BugsModel>();
-            bugs.Add(new BugsModel {Id = ToGuid(12), BugID = 1001, Date = "02/10/2020", Info = "Database Bug", Status = "Fixed" });
-            bugs.Add(new BugsModel {Id = ToGuid(123), BugID = 1002, Date = "03/22/2020", Info = "User Interface Bug", Status = "Not Fixed" });
-            bugs.Add(new BugsModel {Id = ToGuid(2240), BugID = 1003, Date = "04/1/2020", Info = "Logic Bug", Status = "Fixed" });
-            return View(bugs);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, BugsModel model)
