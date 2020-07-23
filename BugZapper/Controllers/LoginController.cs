@@ -27,7 +27,8 @@ namespace BugZapper.Controllers
             return View();
         }
 
-        //Logs in user based on Username and Password and then redirects them to their Profile Page. If they enter incorrectly it will keep them at the loginpage.
+        //Logs in user based on Username and Password and then redirects them to their Profile Page.
+        //If they enter incorrectly it will keep them at the loginpage.
         public ActionResult LoginUser(string username, string pass)
         {
             try
